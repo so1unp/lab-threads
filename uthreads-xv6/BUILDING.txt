@@ -1,0 +1,37 @@
+Como agregar el programa al proceso de compilación
+--------------------------------------------------
+
+Agregar la siguiente regla al archivo Makefile en el diretorio de xv6, justo
+despues de la regla con nombre _forktest:
+
+_uthread: uthread.o uthread_switch.o
+	$(LD) $(LDFLAGS) -N -e main -Ttext 0 -o _uthread uthread.o uthread_switch.o $(ULIB)
+	$(OBJDUMP) -S _uthread > uthread.asm
+
+Importante: tienen que asegurarse que los espacios en blanco que estan al 
+inicio de las lineas son tabulaciones, y no espacios en blanco. De no ser así,
+Make va a fallar.
+
+Luego, en el mismo archivo Makefile, tienen que agregar _uthread en la lista 
+de programas definida con el nombre de UPROGS (es importante el _ inicial en 
+el nombre).
+
+Se adjunta un Makefile ya modificado, que pueden copiar en el directorio.
+
+Que hace cada archivo
+---------------------
+
+uthread.c: 
+Este archivo es el código fuente de la aplicación, y también implementa la
+librería de hilos a nivel de usuario (creación de hilos y su planificación).
+
+uthread_switch.S: 
+Este archivo contiene el código fuente en ensamblador para realizar el cambio
+de contexto entre dos hilos.
+
+Makefile: 
+Es el Makefile modificado para compilar xv6 con el programa uthread.
+
+User-level-threads.html: 
+Ejercicio original de hilos a nivel de usuario, tomado del curso de Sistemas
+Operativos del MIT. Tiene info de cómo realizar el debugging.

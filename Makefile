@@ -1,8 +1,8 @@
 CC=gcc
 BIN=./bin
-CFLAGS=-Wall -g
+CFLAGS=-Wall -g -pthread
 
-PROG=fork exec sh
+PROG=say threads benchmark
 
 LIST=$(addprefix $(BIN)/, $(PROG))
 
