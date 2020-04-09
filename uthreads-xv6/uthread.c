@@ -11,7 +11,6 @@
 #define MAX_THREAD  4
 
 typedef struct thread thread_t, *thread_p;
-typedef struct mutex mutex_t, *mutex_p;
 
 struct thread {
   int        sp;                /* saved stack pointer */
@@ -94,6 +93,7 @@ thread_exit(void)
 {
     current_thread->state = FREE;
     thread_schedule();
+}
 
 static void 
 mythread(void)
@@ -117,5 +117,5 @@ main(int argc, char *argv[])
   thread_create(mythread);
   thread_create(mythread);
   thread_schedule();
-  return 0;
+  exit();
 }

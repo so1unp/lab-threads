@@ -8,7 +8,6 @@
 void* saluda(void*);
 
 int contador;
-
 char *palabra;
 int sleeptime = 1;
 
