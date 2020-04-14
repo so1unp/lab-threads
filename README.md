@@ -116,25 +116,48 @@ En `uthread.c` hay dos variables globales `current_thread` y `next_thread`, que 
 
 En el cambio de contexto de un hilo a otro tiene se tienen que realizar las siguientes acciones:
 
-* Guardar el contexto de ejecución del hilo actual en la pila. Esto se realizar con la instrucción `pushal`, que almacena los registros `EAX`, `EBX`, `ECX`, `EDX`, `ESP`, `EBP`, `ESI`, `EDI` en la pila. El registro `ESP` guarda el puntero a la pila.
+1. Guardar el estado de la CPU del hilo actual en la pila, ccon la instrucción `pushal`. Esta instrucción almacena los registros `EAX`, `EBX`, `ECX`, `EDX`, `ESP`, `EBP`, `ESI`, `EDI` en la pila.
 
-* Luego, se debe guardar el puntero a pila actual (`current_thread->sp = esp`).
+2. Almacenar el puntero a pila actual (`current_thread->sp = esp`).
 
-* A continuación, se debe actualizar el registro `ESP` para que apunte a la pila del hilo a ejecutar (`esp = next_thread->sp`).
+3. Actualizar el registro `ESP` para que apunte a la pila del hilo a ejecutar (`esp = next_thread->sp`).
 
-* Se debe actualizar el valor de la variable `current_thread`, para que apunte al hilo a ejecutar.
+4. Actualizar el valor de `current_thread` para que apunte al hilo a ejecutar.
 
-* Asignar cero a la variable `next_thread`.
+5. Asignar cero a la variable `next_thread`.
 
-* Restaurar el contexto del hilo a ejecutar, mediante la instrucción `popal`. Esta restaura en los registros de la CPU los valores que almaceno una invocación previa de `pushal`.
+6. Restaurar el contexto del hilo a ejecutar con la instrucción `popal`, que restaura en los registros de la CPU los valores que almaceno una invocación previa de `pushal`.
 
-* Realizar el _return_ de la función, con la instrucción `ret`. De esta manera, se continua con la ejecución del hilo seleccionado.
+7. Realizar el _return_ de la función, con la instrucción `ret`. De esta manera, se continua con la ejecución del hilo seleccionado.
 
-## Responder y resolver
+Una ejecución correcta de `uthread.c` tendría que dar como resultado:
 
-1. Completar el código de cambio de contexto en el archivo `uthread_switch.S`.
+```bash
+$ uthread
+my thread running
+Thread 0x2D68: 0
+my thread running
+Thread 0x4D70: 0
+Thread 0x2D68: 1
+Thread 0x4D70: 1
+Thread 0x2D68: 2
+Thread 0x4D70: 2
+Thread 0x2D68: 3
+Thread 0x4D70: 3
+Thread 0x2D68: 4
+Thread 0x4D70: 4
+my thread: exit
+my thread: exit
+thread_schedule: no more runnable threads
+all threads ended.
+$
+```
 
-2. ¿Por qué al realizar un `popa` se permite continuar con la ejecución de `next_thread`?
+## Responder
+
+1. Completar el código de cambio de contexto en el archivo `uthread_switch.S` y comprobar que el programa `uthread.c` ejecute correctamente.
+
+2. ¿Por qué basta con ejecutar `popa` para continuar con la ejecución de `next_thread`?
 
 3. ¿Qué tipo de política de planificación se implementa? Justificar.
 
