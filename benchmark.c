@@ -6,7 +6,6 @@
 
 void test_fork(void);
 void test_thread(void);
-void funcion(void);
 
 int main(int argc, char *argv[]) 
 {
