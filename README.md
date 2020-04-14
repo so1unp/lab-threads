@@ -24,7 +24,7 @@ El hilo 140346665010944 terminó.
 $
 ```
 
-Utilizar estas funciones:
+Utilizar las siguientes funciones para trabajar con hilos:
 
 * [`pthread_create()`](http://man7.org/linux/man-pages/man3/pthread_create.3.html): crea un hilo.
 * [`pthread_join()`](http://man7.org/linux/man-pages/man3/pthread_join.3.html): espera a que el hilo indicado finalice.
@@ -78,7 +78,7 @@ $ /usr/bin/time -p bin/benchmark 2 1000
 
 Responder:
 
-1. ¿Cual de las dos variantes tuvo menos costo, la creación de hilos o la creación de procesos? ¿Por qué?
+1. ¿Cual de las dos variantes tuvo menos costo, la creación de hilos o la creación de procesos? Justificar.
 
 ## Ejercicio 4
 
@@ -130,7 +130,7 @@ En el cambio de contexto de un hilo a otro tiene se tienen que realizar las sigu
 
 * Realizar el _return_ de la función, con la instrucción `ret`. De esta manera, se continua con la ejecución del hilo seleccionado.
 
-Responder:
+## Responder y resolver
 
 1. Completar el código de cambio de contexto en el archivo `uthread_switch.S`.
 
