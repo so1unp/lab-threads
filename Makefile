@@ -1,6 +1,6 @@
 CC=gcc
 BIN=./bin
-CFLAGS=-Wall -g -pthread
+CFLAGS=-Wall -g -pthread -Werror
 
 PROG=say threads benchmark
 

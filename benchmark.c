@@ -6,6 +6,14 @@
 
 void test_fork(void);
 void test_thread(void);
+void funcion(void);
+
+void funcion(void)
+{
+    int i;
+    i = 0;
+    i++;
+}
 
 static int count;
 
@@ -16,8 +24,8 @@ int main(int argc, char *argv[])
     // Chequea número de argumentos
     if (argc < 3) {
         fprintf(stderr, "Uso: %s modo contador\n", argv[0]);
-        fprintf(stderr, "\tmodo: 1 (fork) o 2 (thread)\n");
-        fprintf(stderr, "\tcontador: número de procesos o hilos a crear.\n");
+        fprintf(stderr, "\tmodo: 1 (crea procesos) o 2 (crea hilos)\n");
+        fprintf(stderr, "\tcontador: número de procesos o hilos a generar.\n");
         exit(EXIT_FAILURE);
     }
     
@@ -26,7 +34,7 @@ int main(int argc, char *argv[])
     count = atoi(argv[2]);
     
     if (count <= 0) {
-        fprintf(stderr, "%s: contador debe ser mayor que cero.\n", argv[0]);
+        fprintf(stderr, "%s: el contador debe ser mayor que cero.\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 
@@ -49,13 +57,6 @@ int main(int argc, char *argv[])
 //==========================================================================
 // Código para la prueba con fork()
 //==========================================================================
-void funcion_fork() 
-{
-    int i;
-    i = 0;
-    i++;
-}
-
 void test_fork()
 {
     pid_t pid;
@@ -70,7 +71,7 @@ void test_fork()
         }        
         else if (pid == 0) {
             /* Hijo */
-            funcion_fork();
+            funcion();
             exit(EXIT_SUCCESS);
         }        
         else {
@@ -86,9 +87,7 @@ void test_fork()
 
 void *funcion_hilo(void *null) 
 {
-    int i;
-    i = 0;
-    i++;
+    funcion();
     pthread_exit(NULL);
 }
 
