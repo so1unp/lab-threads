@@ -8,20 +8,11 @@ void test_fork(void);
 void test_thread(void);
 void funcion(void);
 
-void funcion(void)
-{
-    int i;
-    i = 0;
-    i++;
-}
-
-static int count;
-
 int main(int argc, char *argv[]) 
 {
     int modo;
     
-    // Chequea número de argumentos
+    // Chequea los  parametros
     if (argc < 3) {
         fprintf(stderr, "Uso: %s modo contador\n", argv[0]);
         fprintf(stderr, "\tmodo: 1 (crea procesos) o 2 (crea hilos)\n");
@@ -29,7 +20,6 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
     
-    // Obtiene los argumentos
     modo = atoi(argv[1]);
     count = atoi(argv[2]);
     
@@ -71,7 +61,6 @@ void test_fork()
         }        
         else if (pid == 0) {
             /* Hijo */
-            funcion();
             exit(EXIT_SUCCESS);
         }        
         else {
@@ -85,36 +74,13 @@ void test_fork()
 // Código para la prueba con pthread_create()
 //==========================================================================
 
-void *funcion_hilo(void *null) 
-{
-    funcion();
-    pthread_exit(NULL);
-}
-
 void test_thread() 
 {
     int rc, j;
     pthread_t tid;
     
     for (j = 0; j < count; j++) {
-        // COMPLETAR
-        rc = pthread_create();
-        
-        if (rc) {
-            perror("pthread_create");
-            exit(EXIT_FAILURE);
-        }
-        
-        // Espera por el hilo        
-        // COMPLETAR
-        rc = pthread_join();
-
-        if (rc) {            
-            perror("pthread_join");
-            exit(EXIT_FAILURE);
-        }
+        // COMPLETAR: CREAR HILO
+        // COMPLETAR: ESPERAR POR HILO
     }
-    
-    // COMPLETAR
-    pthread_exit();
 }
