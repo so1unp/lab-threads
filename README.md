@@ -1,7 +1,5 @@
 # Laboratorio 4 - Hilos
 
-En este laboratorio vamos a trabajar con hilos.
-
 :bulb: Las respuestas a las preguntas en los ejercicios pueden incluirlas en un archivo de texto con el nombre `respuestas.txt`.
 
 :date: Fecha de entrega: 23/04
