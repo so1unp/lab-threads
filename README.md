@@ -6,7 +6,7 @@
 
 ## Ejercicio 1
 
-Completar el programa `say.c` para que imprima un mensaje una cierta cantidad de veces desde un hilo. El mensaje y el número de repeticiones tienen que ser indicado desde la línea de comandos. Entre cada impresión, el programa debe esperar 1 segundo, y debe ser posible indicar un número distinto desde la línea de comandos. Antes de empezar a imprimir el mensaje el hilo debe indicar su identificador. Desde `main` se debe esperar a que el hilo termine su ejecución e imprimir un aviso antes de finalizar.
+Completar el programa `say.c` para que imprima un mensaje una cierta cantidad de veces desde un hilo. El mensaje y el número de repeticiones se tienen que indicar desde la línea de comandos. El hilo debe esperar 1 segundo entre cada `printf()`. Debe ser posible también indicar un número distinto de segundos desde la línea de comandos, como tercer parámetro opcional. Antes de empezar a imprimir el mensaje el hilo debe indicar su identificador. Desde `main` se debe esperar a que el hilo termine su ejecución e imprimir un aviso antes de finalizar.
 
 La ejecución tendría que tener una salida similar a la siguiente:
 
