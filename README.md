@@ -36,6 +36,18 @@ Responder:
 
 ## Ejercicio 2
 
+Estudiar las llamadas al sistema que invoca `say.c` durante su ejecución, indicando que imprima sólo un mensaje (para hacer más fácil de seguir la traza):
+
+```sh
+$ strace bin/say hola 1 > /dev/null
+```
+
+Responder:
+
+1. ¿Cuál es la llamada al sistema que crea el hilo? Justificar.
+
+## Ejercicio 3
+
 Completar el programa [`threads.c`](threads.c) para que cree *n* hilos:
 
 * El número *n* debe ser indicado como parámetro en la línea de comandos.
@@ -59,7 +71,7 @@ bin/threads: todos los hilos terminaron.
 $
 ```
 
-## Ejercicio 3
+## Ejercicio 4
 
 Vamos a comparar el costo de crear hilos comparado con el de crear procesos. Completar el programa `benchmark.c` para generar una cierta cantidad de procesos hijos o de hilos, según se le indique por la línea de comandos.
 
@@ -78,7 +90,7 @@ Responder:
 
 1. ¿Cual de las dos variantes tuvo menos costo, la creación de hilos o la creación de procesos? Justificar.
 
-## Ejercicio 4
+## Ejercicio 5
 
 En este ejercicio vamos a implementar hilos a nivel de usuario en _xv6_. Para esto copiar estos dos archivos en el directorio de _xv6_:
 
