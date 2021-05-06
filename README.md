@@ -2,11 +2,9 @@
 
 :bulb: Las respuestas a las preguntas en los ejercicios pueden incluirlas en un archivo de texto con el nombre `respuestas.txt`.
 
-:date: Fecha de entrega: 23/04
-
 ## Ejercicio 1
 
-Completar el programa `say.c` para que imprima un mensaje una cierta cantidad de veces desde un hilo. El mensaje y el número de repeticiones se tienen que indicar desde la línea de comandos. El hilo debe esperar 1 segundo entre cada `printf()`. Debe ser posible también indicar un número distinto de segundos desde la línea de comandos, como tercer parámetro opcional. Antes de empezar a imprimir el mensaje el hilo debe indicar su identificador. Desde `main()` se debe esperar a que el hilo termine su ejecución e imprimir un aviso antes de finalizar.
+Completar el programa `say.c` para que imprima un mensaje la cantidad de veces indicada, desde un hilo. El mensaje y el número de repeticiones se tienen que indicar desde la línea de comandos. El hilo debe esperar 1 segundo entre cada `printf()`. Debe ser posible también indicar un número distinto de segundos desde la línea de comandos, como tercer parámetro opcional. Antes de empezar a imprimir el mensaje el hilo debe imprimir su identificador. Desde `main()` se debe esperar a que el hilo termine su ejecución e imprimir un aviso antes de finalizar.
 
 La ejecución tendría que tener una salida similar a la siguiente:
 
@@ -52,7 +50,7 @@ Completar el programa [`threads.c`](threads.c) para que cree *n* hilos:
 
 * El número *n* debe ser indicado como parámetro en la línea de comandos.
 * Cada hilo debe tener asignado un _id_ único (un número entero). El primer hilo creado debe tener el _id_ 1, el segundo el _id_ 2 y así sucesivamente.
-* Cada hilo debe imprimir por la salida estándar su *identificador* y su _id_. Para obtener el identificador del hilo emplear la función [`pthread_self()`](http://man7.org/linux/man-pages/man3/pthread_self.3.html).
+* Cada hilo debe imprimir por la salida estándar *identificador* y su _id_. Para obtener el identificador del hilo emplear la función [`pthread_self()`](http://man7.org/linux/man-pages/man3/pthread_self.3.html).
 * Cada hilo debe esperar un número aleatorio de segundos, no mayor a 10, antes de terminar. Utilizar la función [`sleep()`](http://man7.org/linux/man-pages/man3/sleep.3.html).
 * Al finalizar, cada hilo debe indicar el número de segundos que durmió como parámetro para  [`pthread_exit()`](http://man7.org/linux/man-pages/man3/pthread_exit.3.html).
 * El hilo `main` debe esperar a que el resto de los hilos finalicen, e imprimir cuantos segundos durmió cada hilo. Estos datos se obtiene mediante [`pthread_join()`](http://man7.org/linux/man-pages/man3/pthread_join.3.html).
@@ -94,15 +92,17 @@ Responder:
 
 En este ejercicio vamos a implementar hilos a nivel de usuario en _xv6_. Para esto copiar estos dos archivos en el directorio de _xv6_:
 
-* `uthread.c`: contiene tanto el programa de prueba como la librería de hilos a nivel de usuario (creación de hilos y su planificación).
+* `uthread.c`: contiene un programa de prueba que utiliza la librería de hilos a nivel de usuario.
+
+* `uthreadlib.c` y `uthreadlib.h`: contienen la implementación de una librería de hilos a nivel de usuario.
 
 * `uthread_switch.S`: contiene el código en ensamblador para realizar el cambio de contexto entre dos hilos.
 
 Modificar luego el archivo `Makefile`, agregando `_uthread` a la lista `UPROGS` y lo siguiente al final del archivo:
 
 ```Makefile
-_uthread: uthread.o uthread_switch.o
-	$(LD) $(LDFLAGS) -N -e main -Ttext 0 -o _uthread uthread.o uthread_switch.o $(ULIB)
+_uthread: uthread.o uthreadlib.o uthread_switch.o
+	$(LD) $(LDFLAGS) -N -e main -Ttext 0 -o _uthread uthread.o uthreadlib.o uthread_switch.o $(ULIB)
 	$(OBJDUMP) -S _uthread > uthread.asm
 ```
 
@@ -113,16 +113,16 @@ xv6...
 cpu0: starting 0
 sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58
 init: starting sh
-$ uthread
+$ uthread 2 1
 all threads ended.
 $
 ```
 
-Sin embargo, como puede verse en la ejecución, ningun hilo se ejecutó ya que falta implementar el cambio de contexto en el archivo `uthread_switch.S`.
+Como puede verse en la ejecución, ningun hilo se ejecutó ya que falta implementar el cambio de contexto en el archivo `uthread_switch.S`.
 
 ### Cambio de contexto
 
-En `uthread.c` hay dos variables globales `current_thread` y `next_thread`, que son punteros a una estructura de tipo `thread`. Esta estructura contiene la pila de un hilo y una copia de su puntero a pila (`sp` o _stack pointer_). Para realizar el cambio de contexto, la función `uthread_switch` debe guardar el estado del hilo actual en `current_thread`, restaurar el estado del hilo indicado en `next_thread` y hacer que `current_thread` apunte a `next_thread`.
+En `uthreadlib.c` hay dos variables `current_thread` y `next_thread`, que son punteros a una estructura de tipo `thread`. Esta estructura contiene la pila de un hilo y una copia de su puntero a pila (`sp` o _stack pointer_). Para realizar el cambio de contexto, la función `uthread_switch` debe guardar el estado del hilo actual en `current_thread`, restaurar el estado del hilo indicado en `next_thread` y hacer que `current_thread` apunte a `next_thread`.
 
 En el cambio de contexto de un hilo a otro tiene se tienen que realizar las siguientes acciones:
 
@@ -143,7 +143,7 @@ En el cambio de contexto de un hilo a otro tiene se tienen que realizar las sigu
 Una ejecución correcta de `uthread.c` tendría que dar como resultado:
 
 ```bash
-$ uthread
+$ uthread 2 5
 my thread running
 Thread 0x2D68: 0
 my thread running
@@ -171,7 +171,7 @@ $
 
 3. ¿Qué tipo de política de planificación se implementa? Justificar.
 
-4. La implementación tiene un _bug_: si agregamos un tercer hilo, este no se ejecuta hasta que los dos primeros finalicen. Indicar por qué sucede esto y modificar el código para solucionarlo.
+4. La implementación tiene una limitación: si ejecutamos más de dos hilos, el tercero no se ejecuta hasta que finalicen los dos primeros. Indicar por qué sucede esto y modificar el código para solucionarlo.
 
 5. Modificar el código para que cuando no existan más hilos para ejecutar, se retome el hilo `main`.
 
