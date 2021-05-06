@@ -4,12 +4,12 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-void test_fork(void);
-void test_thread(void);
+void test_fork(int count);
+void test_thread(int count);
 
 int main(int argc, char *argv[]) 
 {
-    int modo;
+    int modo, count;
     
     // Chequea los  parametros
     if (argc < 3) {
@@ -34,10 +34,10 @@ int main(int argc, char *argv[])
     
     if (modo == 1) {
         printf("Probando fork()...\n");
-        test_fork();
+        test_fork(count);
     } else if (modo == 2) {
         printf("Probando pthread_create()...\n");
-        test_thread();
+        test_thread(count);
     }
 
     exit(EXIT_SUCCESS);
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 //==========================================================================
 // Código para la prueba con fork()
 //==========================================================================
-void test_fork()
+void test_fork(int count)
 {
     pid_t pid;
     int j, status;
@@ -73,7 +73,7 @@ void test_fork()
 // Código para la prueba con pthread_create()
 //==========================================================================
 
-void test_thread() 
+void test_thread(int count) 
 {
     int rc, j;
     pthread_t tid;
