@@ -106,7 +106,7 @@ _uthread: uthread.o uthreadlib.o uthread_switch.o
 	$(OBJDUMP) -S _uthread > uthread.asm
 ```
 
-Para probar que se haya agregado correctamente el nuevo programa, ejecutar _xv6_ y luego invocar el programa `uthread`. Al ejecutarlo, tiene indicar que todos los hilos finalizaron:
+Para probar que se haya agregado correctamente el nuevo programa, ejecutar _xv6_ y luego invocar el programa `uthread`. Al ejecutarlo, tiene que indicar que todos los hilos finalizaron:
 
 ```sh
 xv6...
@@ -177,4 +177,4 @@ $
 
 ---
 
-¡Fin del Laboratorio 4!
+¡Fin del Laboratorio 5!
