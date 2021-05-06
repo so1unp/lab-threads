@@ -90,7 +90,7 @@ Responder:
 
 ## Ejercicio 5
 
-En este ejercicio vamos a implementar hilos a nivel de usuario en _xv6_. Para esto copiar estos dos archivos en el directorio de _xv6_:
+En este ejercicio vamos a implementar hilos a nivel de usuario en _xv6_. Para esto copiar estos archivos en el directorio de _xv6_:
 
 * `uthread.c`: contiene un programa de prueba que utiliza la librería de hilos a nivel de usuario.
 
