@@ -1,10 +1,10 @@
 # Laboratorio 5 - Hilos
 
-:bulb: Las respuestas a las preguntas en los ejercicios pueden incluirlas en un archivo de texto con el nombre `respuestas.txt`.
+:bulb: Las respuestas a las preguntas en los ejercicios pueden incluirlas en un archivo de texto con el nombre del ejercicio. Por ejemplo `ejercicio1.txt`.
 
 ## Ejercicio 1
 
-Completar el programa `say.c` para que imprima un mensaje la cantidad de veces indicada, desde un hilo. El mensaje y el número de repeticiones se tienen que indicar desde la línea de comandos. El hilo debe esperar 1 segundo entre cada `printf()`. Debe ser posible también indicar un número distinto de segundos desde la línea de comandos, como tercer parámetro opcional. Antes de empezar a imprimir el mensaje el hilo debe imprimir su identificador. Desde `main()` se debe esperar a que el hilo termine su ejecución e imprimir un aviso antes de finalizar.
+Completar el programa `say.c` para que, desde un hilo, imprima un mensaje la cantidad de veces indicada. El mensaje y el número de repeticiones se indican desde la línea de comandos. El hilo debe esperar 1 segundo entre cada `printf()`. Debe ser posible también indicar un número distinto de segundos desde la línea de comandos, como tercer parámetro opcional. Antes de empezar a imprimir el mensaje el hilo debe imprimir su identificador. Desde `main()` se debe esperar a que el hilo termine su ejecución e imprimir un aviso antes de finalizar.
 
 La ejecución tendría que tener una salida similar a la siguiente:
 
@@ -34,7 +34,7 @@ Responder:
 
 ## Ejercicio 2
 
-Estudiar las llamadas al sistema que invoca `say.c` durante su ejecución, indicando que imprima sólo un mensaje (para hacer más fácil de seguir la traza):
+Estudiar las llamadas al sistema que invoca `say.c` durante su ejecución. Indicar que imprima sólo un mensaje para hacer más fácil de seguir la traza:
 
 ```sh
 $ strace bin/say hola 1 > /dev/null
@@ -50,9 +50,9 @@ Completar el programa [`threads.c`](threads.c) para que cree *n* hilos:
 
 * El número *n* debe ser indicado como parámetro en la línea de comandos.
 * Cada hilo debe tener asignado un _id_ único (un número entero). El primer hilo creado debe tener el _id_ 1, el segundo el _id_ 2 y así sucesivamente.
-* Cada hilo debe imprimir por la salida estándar *identificador* y su _id_. Para obtener el identificador del hilo emplear la función [`pthread_self()`](http://man7.org/linux/man-pages/man3/pthread_self.3.html).
-* Cada hilo debe esperar un número aleatorio de segundos, no mayor a 10, antes de terminar. Utilizar la función [`sleep()`](http://man7.org/linux/man-pages/man3/sleep.3.html).
-* Al finalizar, cada hilo debe indicar el número de segundos que durmió como parámetro para  [`pthread_exit()`](http://man7.org/linux/man-pages/man3/pthread_exit.3.html).
+* Cada hilo debe imprimir por la salida estándar su *identificador* y _id_. Para obtener el identificador del hilo emplear la función [`pthread_self()`](http://man7.org/linux/man-pages/man3/pthread_self.3.html).
+* Cada hilo debe esperar un número aleatorio de segundos no mayor a 10, antes de terminar. Utilizar la función [`sleep()`](http://man7.org/linux/man-pages/man3/sleep.3.html).
+* Al finalizar, cada hilo debe indicar el número de segundos que durmió como parámetro al invocar [`pthread_exit()`](http://man7.org/linux/man-pages/man3/pthread_exit.3.html).
 * El hilo `main` debe esperar a que el resto de los hilos finalicen, e imprimir cuantos segundos durmió cada hilo. Estos datos se obtiene mediante [`pthread_join()`](http://man7.org/linux/man-pages/man3/pthread_join.3.html).
 
 Por ejemplo, si se ejecuta el programa indicando que se creen 3 hilos, debe obtenerse una salida similar a la siguiente:
