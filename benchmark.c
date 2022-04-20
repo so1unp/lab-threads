@@ -75,8 +75,7 @@ void test_fork(int count)
 
 void test_thread(int count) 
 {
-    int rc, j;
-    pthread_t tid;
+    int j;
     
     for (j = 0; j < count; j++) {
         // COMPLETAR: CREAR HILO
