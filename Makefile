@@ -17,4 +17,4 @@ $(BIN)/%: %.c
 
 .PHONY: clean
 clean:
-	rm -f $(BIN)/ej* $(BIN)/hola $(BIN)/sh
+	rm -f $(LIST)
