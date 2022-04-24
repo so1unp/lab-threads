@@ -59,6 +59,9 @@ dkms.conf
 # Backup files
 *~
 
+# Swap files
+*.swp
+
 # Binarios de los ejercicios
 bin/*
 !bin/.keep
