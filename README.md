@@ -51,18 +51,14 @@ Completar el programa [`threads.c`](threads.c) para que cree *n* hilos:
 
 * El número *n* debe ser indicado como parámetro en la línea de comandos.
 * Cada hilo debe tener asignado un _id_ único (un número entero). El primer hilo creado debe tener el _id_ 1, el segundo el _id_ 2 y así sucesivamente.
-* Cada hilo debe imprimir por la salida estándar su *identificador* y _id_. Para obtener el identificador del hilo emplear la función [`pthread_self()`](http://man7.org/linux/man-pages/man3/pthread_self.3.html).
 * Cada hilo debe esperar un número aleatorio de segundos no mayor a 10, antes de terminar. Utilizar la función [`sleep()`](http://man7.org/linux/man-pages/man3/sleep.3.html).
-* Al finalizar, cada hilo debe indicar el número de segundos que durmió como parámetro al invocar [`pthread_exit()`](http://man7.org/linux/man-pages/man3/pthread_exit.3.html).
-* El hilo `main` debe esperar a que el resto de los hilos finalicen, e imprimir cuantos segundos durmió cada hilo. Estos datos se obtiene mediante [`pthread_join()`](http://man7.org/linux/man-pages/man3/pthread_join.3.html).
+* Al finalizar, cada hilo debe indicar el número de segundos que durmió como parámetro de [`pthread_exit()`](http://man7.org/linux/man-pages/man3/pthread_exit.3.html).
+* El hilo `main` debe esperar a que el resto de los hilos finalicen. Luego debe imprimir cuantos segundos durmió cada hilo. Estos datos se obtiene mediante [`pthread_join()`](http://man7.org/linux/man-pages/man3/pthread_join.3.html).
 
 Por ejemplo, si se ejecuta el programa indicando que se creen 3 hilos, debe obtenerse una salida similar a la siguiente:
 
 ```bash
 $ bin/threads 3
-Hilo 3434: id 2
-Hilo 3432: id 3
-Hilo 3431: id 1
 Hilo 3434 durmió 4 segundos.
 Hilo 3432 durmió 2 segundos.
 Hilo 3431 durmió 7 segundos.
