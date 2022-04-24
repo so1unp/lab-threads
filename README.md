@@ -43,6 +43,7 @@ $ strace bin/say hola 1 > /dev/null
 Responder:
 
 1. ¿Cuál es la llamada al sistema que crea el hilo? Justificar.
+2. ¿Cómo se relaciona la repuesta anterior con el modelo de hilos que utiliza Linux?
 
 ## Ejercicio 3
 
