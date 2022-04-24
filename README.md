@@ -85,7 +85,7 @@ Responder:
 
 1. ¿Cual de las dos variantes tuvo menos costo, la creación de hilos o la creación de procesos? Justificar.
 
-## Ejercicio 5
+## Ejercicio 5: hilos en xv6
 
 En este ejercicio vamos a implementar hilos a nivel de usuario en _xv6_. Para esto copiar estos archivos en el directorio de _xv6_:
 
