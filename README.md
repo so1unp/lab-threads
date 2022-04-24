@@ -29,8 +29,8 @@ Utilizar las siguientes funciones para trabajar con hilos:
 
 Responder:
 
-1. ¿Que sucede si comentan la funcion `pthred_join()` y `main()` sigue utilizando `exit()`? Justificar.
-2. Mantener comentado `pthread_join()` y reemplazar en `main()` la invocación a `exit()` por `pthread_exit()`. ¿Qué sucede ahora? Justificar.
+1. No realizar la invocación de `pthred_join()`. Si `main()` sigue utilizando `exit()`, ¿Que sucede? Justificar.
+2. Sin agregar la invocación a `pthread_join()`, reemplazar en `main()` la invocación a `exit()` por `pthread_exit()`. ¿Qué sucede ahora? Justificar.
 
 ## Ejercicio 2
 
